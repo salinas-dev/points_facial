@@ -32,14 +32,26 @@ def process_image(image):
         'right_eye_center_x': [None], 'right_eye_center_y': [None],
         'nose_tip_x': [None], 'nose_tip_y': [None],
         'mouth_left_corner_x': [None], 'mouth_left_corner_y': [None],
-        'mouth_right_corner_x': [None], 'mouth_right_corner_y': [None]
+        'mouth_right_corner_x': [None], 'mouth_right_corner_y': [None],
+        'brow_left_x': [None], 'brow_left_y': [None],
+        'brow_right_x': [None], 'brow_right_y': [None],
+        'chin_x': [None], 'chin_y': [None],
+        'left_cheek_x': [None], 'left_cheek_y': [None],
+        'right_cheek_x': [None], 'right_cheek_y': [None],
+        'left_ear_x': [None], 'left_ear_y': [None],
+        'right_ear_x': [None], 'right_ear_y': [None],
+        'mouth_center_x': [None], 'mouth_center_y': [None],
     }
 
     if results.multi_face_landmarks:
         for face_landmarks in results.multi_face_landmarks:
             landmarks_mapping = {
                 33: 'left_eye_center', 263: 'right_eye_center',
-                1: 'nose_tip', 61: 'mouth_left_corner', 291: 'mouth_right_corner'
+                1: 'nose_tip', 61: 'mouth_left_corner', 291: 'mouth_right_corner',
+                19: 'brow_left', 24: 'brow_right', 152: 'chin',
+                234: 'left_cheek', 454: 'right_cheek',
+                174: 'left_ear', 454: 'right_ear', # Es necesario cambiar el índice a uno diferente para el derecho.
+                0: 'mouth_center'  # Punto central de la boca
             }
             for idx, landmark in enumerate(face_landmarks.landmark):
                 x = int(landmark.x * image.shape[1])
